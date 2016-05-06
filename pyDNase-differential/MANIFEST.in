@@ -1,0 +1,4 @@
+include pyDNase/footprinting/WellingtonC.pyx
+include pyDNase/footprinting/WellingtonC.c
+include pyDNase/footprinting/WellingtonC.h
+include test/*
