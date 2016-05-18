@@ -37,7 +37,7 @@ def write_control_to_disk(item):
 
 def xrange_from_string(range_string):
     try:
-        range_string = list(map(int, range_string.split(",")))
+        range_string = list(map(int, range_string.split(";")))
         range_string = range(range_string[0], range_string[1], range_string[2])
         assert len(range_string) > 0
         return range_string
@@ -139,8 +139,8 @@ class Diffwell(pyDNase.footprinting.wellington):
 
 parser = argparse.ArgumentParser(description='Scores Differential Footprints using Wellington-Bootstrap.')
 parser.add_argument("-fp", "--footprint-sizes",
-                    help="Range of footprint sizes to try in format \"from,to,step\" (default: 11,26,2)",
-                    default="11,26,2",
+                    help="Range of footprint sizes to try in format \"from;to;step\" (default: 11;26;2)",
+                    default="11;26;2",
                     type=str)
 parser.add_argument("-fdr","--FDR_cutoff",
                     help="Detect footprints using the FDR selection method at a specific FDR (default: 0.01)",

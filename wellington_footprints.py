@@ -25,13 +25,13 @@ __version__ = "0.2.0"
 
 parser = argparse.ArgumentParser(description='Footprint the DHSs in a DNase-seq experiment using the Wellington Algorithm.')
 parser.add_argument("-b","--bonferroni",action="store_true", help="Performs a bonferroni correction (default: False)",default=False)
-parser.add_argument("-sh", "--shoulder-sizes", help="Range of shoulder sizes to try in format \"from,to,step\" (default: 35,36,1)",default="35,36,1",type=str)
-parser.add_argument("-fp", "--footprint-sizes", help="Range of footprint sizes to try in format \"from,to,step\" (default: 11,26,2)",default="11,26,2",type=str)
+parser.add_argument("-sh", "--shoulder-sizes", help="Range of shoulder sizes to try in format \"from;to;step\" (default: 35;36;1)",default="35;36;1",type=str)
+parser.add_argument("-fp", "--footprint-sizes", help="Range of footprint sizes to try in format \"from;to;step\" (default: 11;26;2)",default="11;26;2",type=str)
 parser.add_argument("-d", "--one_dimension",action="store_true", help="Use Wellington 1D instead of Wellington (default: False)",default=False)
 parser.add_argument("-fdr","--FDR_cutoff", help="Write footprints using the FDR selection method at a specific FDR (default: 0.01)",default=0.01,type=float)
 parser.add_argument("-fdriter", "--FDR_iterations", help="How many randomisations to use when performing FDR calculations (default: 100)",default=100,type=int)
 parser.add_argument("-fdrlimit", "--FDR_limit", help="Minimum p-value to be considered significant for FDR calculation (default: -20)",default=-20,type=int)
-parser.add_argument("-pv","--pv_cutoffs", help="Select footprints using a range of pvalue cutoffs (default: -10,-20,-30,-40,-50,-75,-100,-300,-500,-700",default="-10,-20,-30,-40,-50,-75,-100,-300,-500,-700",type=str)
+parser.add_argument("-pv","--pv_cutoffs", help="Select footprints using a range of pvalue cutoffs (default: -10;-20;-30;-40;-50;-75;-100;-300;-500;-700",default="-10;-20;-30;-40;-50;-75;-100;-300;-500;-700",type=str)
 parser.add_argument("-dm","--dont-merge-footprints",action="store_true", help="Disables merging of overlapping footprints (Default: False)",default=False)
 parser.add_argument("-o","--output_prefix", help="The prefix for results files (default: <reads.regions>)",default="",type=str)
 parser.add_argument("-p", help="Number of processes to use (default: uses all CPUs)",default=0,type=int)
@@ -44,7 +44,7 @@ clargs = parser.parse_args()
 
 def xrange_from_string(range_string):
     try:
-        range_string = list(map(int,range_string.split(",")))
+        range_string = list(map(int,range_string.split(";")))
         range_string = range(range_string[0],range_string[1],range_string[2])
         assert len(range_string) > 0
         return range_string
@@ -55,12 +55,12 @@ try:
     clargs.shoulder_sizes = xrange_from_string(clargs.shoulder_sizes)
     clargs.footprint_sizes = xrange_from_string(clargs.footprint_sizes)
 except ValueError:
-    raise RuntimeError("shoulder and footprint sizes must be supplied as from,to,step")
+    raise RuntimeError("shoulder and footprint sizes must be supplied as from;to;step")
 
 try:
-    clargs.pv_cutoffs = map(int,clargs.pv_cutoffs.split(","))
+    clargs.pv_cutoffs = map(int,clargs.pv_cutoffs.split(";"))
 except:
-    raise RuntimeError("p-value cutoffs must be supplied as a string of numbers separated by commas")
+    raise RuntimeError("p-value cutoffs must be supplied as a string of numbers separated by semicolons")
 
 assert 0 < clargs.FDR_cutoff < 1, "FDR must be between 0 and 1"
 assert clargs.FDR_limit < 0, "FDR limit must be less than 0"
