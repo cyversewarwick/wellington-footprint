@@ -28,3 +28,7 @@ python ../scripts/dnase_to_javatreeview.py WellingtonFootprints.FDR.bed $2 outpu
 
 #get the wiggle tracks
 python ../scripts/dnase_wig_tracks.py processed_peaks.bed $2 output_visualisation/fw_cuts.wig output_visualisation/rv_cuts.wig
+
+#wipe out tempfiles
+rm *.bam.bai
+rm processed_peaks.bed
