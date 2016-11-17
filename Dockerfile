@@ -33,6 +33,10 @@ RUN pip install pyDNase
 
 MAINTAINER Krzysztof Polanski <k.t.polanski@warwick.ac.uk>
 
+#set up analysis crash text file
+RUN apt-get -y install git
+RUN git clone https://github.com/cyversewarwick/analysis_crash.git
+
 # so this is what is going to run by default when you trigger this, in the virtual machine
 # call the wellington wrapper from the other directory while staying in /agave with the files
 # note the lack of a default call later. this is a multi-script wrapper
