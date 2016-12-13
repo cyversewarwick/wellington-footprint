@@ -16,7 +16,7 @@ The output features a number of potential visualisations discussed in depth in a
 
 ## Test Run
 
-If you want to try Wellington and get a feel for its inputs and outputs, test data is available at `cyverseuk/wellington-footprint_testdata` and `cyverseuk/wellington-bootstrap_testdata` under Community Data. The parameters can be left at default values.
+If you want to try Wellington and get a feel for its inputs and outputs, test data is available at `iplantcollaborative/example_data/cyverseuk/wellington-footprint_testdata` and `iplantcollaborative/example_data/cyverseuk/wellington-bootstrap_testdata` under Community Data. The parameters can be left at default values.
 
 ## Input in Detail
 
